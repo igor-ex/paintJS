@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PaintJS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+    <nav class="horizontal-menu">
+        <ul class="settings">
+            <li id="setting">Settings
+                <ul id="settingInner">
+                    <li>Lang
+                        <ul>
+                            <li>Eng</li>
+                            <li>Ru</li>
+                        </ul>
+                    </li>
+                    <li>Theme</li>
+                </ul>
+            </li>
+        </ul>
+        <script>
+            const setting = document.getElementById('setting');
+            const settingInner = document.getElementById('settingInner');
+            setting.addEventListener('click', function (ev) {
+                settingInner.classList.toggle('visible');
+                ev.stopPropagation();
+            });
+            window.addEventListener('click', function () {
+                settingInner.classList.remove('visible');
+            });
+        </script>
+    </nav>
+    <div class="wrapper">
+        <nav class="vertical-menu">
+        </nav>
+        <div id="content" class="content">asdf</div>
+        <nav id="layers" class="layers">sdf</nav>
+    </div>
+</div>
+<script src="src/main.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 @font-size: 20px;
+@settings-width: 150px;
 
 /* general */
 
@@ -20,6 +21,7 @@ body {
   padding: 0;
 }
 
+/* page main elements */
 .app {
   padding: 15px;
   height: 100%;
@@ -29,12 +31,12 @@ body {
 }
 
 .horizontal-menu {
-  height: 50px;
+  height: 70px;
   border: 1px solid gray;
 }
 .settings {
   position: relative;
-  width: 100px;
+  width: @settings-width;
   padding: 0;
   margin: 0;
 }
@@ -48,15 +50,16 @@ body {
   padding: 5px 10px;
   position: relative;
   background: white;
-  width: 100px;
+  width: @settings-width;
   border: 1px solid gray;
 }
 
 .settings ul {
   position: absolute;
   top: 0;
-  left: 98px;
+  left: @settings-width - 2px;
   padding: 0;
+  z-index: 10;
 }
 
 #setting {
@@ -100,6 +103,11 @@ body {
 .content {
   flex: 1;
   border: 1px solid gray;
+  position: relative;
+
+  &__canvas {
+    position: absolute;
+  }
 }
 
 .layers {

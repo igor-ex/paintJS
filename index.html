@@ -9,12 +9,12 @@
 <div class="app">
     <nav class="horizontal-menu">
         <ul class="settings">
-            <li id="setting">Settings
+            <li id="setting"><span id="settingsLabel"></span>
                 <ul id="settingInner">
                     <li>Lang
                         <ul>
-                            <li>Eng</li>
-                            <li>Ru</li>
+                            <li onclick="app.setLanguage('en')">Eng</li>
+                            <li onclick="app.setLanguage('ru')">Ru</li>
                         </ul>
                     </li>
                     <li>Theme</li>
@@ -36,10 +36,18 @@
     <div class="wrapper">
         <nav class="vertical-menu">
         </nav>
-        <div id="content" class="content">asdf</div>
-        <nav id="layers" class="layers">sdf</nav>
+        <div id="content" class="content">
+            <canvas class="content__canvas"></canvas>
+            <canvas class="content__canvas" id="serviceCanvas"></canvas>
+        </div>
+        <nav id="layers" class="layers"></nav>
     </div>
 </div>
+<script src="src/text.js"></script>
+<script src="src/lang.js"></script>
+<script src="src/state.js"></script>
+<script src="src/layers.js"></script>
+<script src="src/app.js"></script>
 <script src="src/main.js"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@ body {
   margin: 0;
   padding: 0;
 }
+/* page main elements */
 .app {
   padding: 15px;
   height: 100%;
@@ -25,12 +26,12 @@ body {
   flex-direction: column;
 }
 .horizontal-menu {
-  height: 50px;
+  height: 70px;
   border: 1px solid gray;
 }
 .settings {
   position: relative;
-  width: 100px;
+  width: 150px;
   padding: 0;
   margin: 0;
 }
@@ -42,14 +43,15 @@ body {
   padding: 5px 10px;
   position: relative;
   background: white;
-  width: 100px;
+  width: 150px;
   border: 1px solid gray;
 }
 .settings ul {
   position: absolute;
   top: 0;
-  left: 98px;
+  left: 148px;
   padding: 0;
+  z-index: 10;
 }
 #setting {
   display: block;
@@ -81,6 +83,10 @@ body {
 .content {
   flex: 1;
   border: 1px solid gray;
+  position: relative;
+}
+.content__canvas {
+  position: absolute;
 }
 .layers {
   width: 200px;

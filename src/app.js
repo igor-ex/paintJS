@@ -1,6 +1,7 @@
 
 function App () {
     this.text = null;
+    this.layers = null;
 }
 
 App.prototype.init = function () {
@@ -10,6 +11,8 @@ App.prototype.init = function () {
     const settingsLabel = document.getElementById('settingsLabel');
     this.text.setText('settings', settingsLabel);
     this.text.renderFields(state.language);
+    this.layers = new Layers;
+    this.layers.init();
 };
 
 App.prototype.setLanguage = function (lang) {

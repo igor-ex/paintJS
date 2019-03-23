@@ -91,4 +91,15 @@ body {
 .layers {
   width: 200px;
 }
+.layers__layer {
+  cursor: pointer;
+  user-select: none;
+}
+.layers__layer_active {
+  background: red;
+  color: white;
+}
+.add-layer-button {
+  padding: 7px 15px;
+}
 /*# sourceMappingURL=style.css.map */

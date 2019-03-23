@@ -40,7 +40,7 @@ Layers.prototype.add = function () {
         });
         layerHandler.classList.add('layers__layer_active');
     });
-    if (this.canvasContainer.lastChild = this.serviceLayer.canvas) {
+    if (this.canvasContainer.lastChild === this.serviceLayer.canvas) {
         this.canvasContainer.insertBefore(canvas, this.serviceLayer.canvas);
     } else {
         this.canvasContainer.appendChild(canvas);

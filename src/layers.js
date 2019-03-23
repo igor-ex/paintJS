@@ -12,6 +12,8 @@ Layers.prototype.init = function () {
     this.serviceLayer.canvas = document.getElementById('serviceCanvas');
     this.canvasContainer = document.getElementById('content');
     this.layersContainer = document.getElementById('layers');
+    this.width = this.canvasContainer.clientWidth;
+    this.height = this.canvasContainer.clientHeight;
     this.serviceLayer.context = this.serviceLayer.canvas.getContext('2d');
     this.add();
     document.getElementById('addLayer').addEventListener('click', () => {
@@ -22,6 +24,9 @@ Layers.prototype.init = function () {
 Layers.prototype.add = function () {
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas_' + this.layerCounter;
+    canvas.classList.add('content__canvas');
+    canvas.width = this.width;
+    canvas.height = this.height;
     const context = canvas.getContext('2d');
     const layer = {canvas, context};
     const layerHandler = document.createElement('div');

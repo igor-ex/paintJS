@@ -10,11 +10,10 @@ Text.prototype.setText = function () {//устанавливает текст д
     //принимает разное количество аргументов:
     //1) строка-идентификатор текста, элемент в котором нужно ее отобразить
     //2) строка-идентификатор текста, колбэк который получит текстовую строку и сделает с ней что угодно
-    //3)колбэк
     if (typeof arguments[1] === 'object') {
         this.simpleFields.push({label: arguments[0], element: arguments[1]});
     } else if (typeof arguments[1] === 'function') {
-        this.simpleFields.push({label: arguments[0], callback: arguments[1]});
+        this.callbacks.push({label: arguments[0], callback: arguments[1]});
     } else {
         throw new TypeError('wrong argument type');
     }

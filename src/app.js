@@ -12,12 +12,12 @@ App.prototype.init = function () {
     const settingsEl = document.getElementById('settings');
     const settingsLabel = document.getElementById('settingsLabel');
     this.text.setText('settings', settingsLabel);
-    this.text.renderFields(this.state.language);
     this.layers = new Layers;
-    this.layers.init();
+    this.layers.init(this);
+    this.text.renderFields(this.state.language);
 };
 
 App.prototype.setLanguage = function (lang) {
-    this.language = lang;
+    this.state.language = lang;
     this.text.renderFields(lang);
 };

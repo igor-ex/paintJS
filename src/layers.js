@@ -6,9 +6,11 @@ function Layers () {
     this.layersContainer = null;
     this.layerCounter = 1;
     this.addLayerButton = null;
+    this.app = null;
 }
 
-Layers.prototype.init = function () {
+Layers.prototype.init = function (app) {
+    this.app = app;
     this.serviceLayer = {};
     this.serviceLayer.canvas = document.getElementById('serviceCanvas');
     this.canvasContainer = document.getElementById('content');
@@ -23,6 +25,7 @@ Layers.prototype.init = function () {
     this.addLayerButton.addEventListener('click', () => {
         this.add();
     });
+    this.app.text.setText('addLayerButton', this.addLayerButton);
 };
 
 Layers.prototype.add = function () {
@@ -35,7 +38,11 @@ Layers.prototype.add = function () {
     const layer = {canvas, context};
     const layerHandler = document.createElement('div');
     const layerNameEl = document.createElement('span');
-    layerNameEl.innerText =  'layer ' + this.layerCounter;
+    layerNameEl.innerText =  languages[this.app.state.language].layer + ' ' + this.layerCounter;
+    const layerIndex = this.layerCounter;
+    this.app.text.setText('layer', text => {
+        layerNameEl.innerText = text + ' ' + layerIndex;
+    });
     layerHandler.appendChild(layerNameEl);
     layerHandler.classList.add('layers__layer');
     layerHandler.addEventListener('click', () => {

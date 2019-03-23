@@ -5,6 +5,7 @@ function Layers () {
     this.canvasContainer = null;
     this.layersContainer = null;
     this.layerCounter = 1;
+    this.addLayerButton = null;
 }
 
 Layers.prototype.init = function () {
@@ -14,9 +15,12 @@ Layers.prototype.init = function () {
     this.layersContainer = document.getElementById('layers');
     this.width = this.canvasContainer.clientWidth;
     this.height = this.canvasContainer.clientHeight;
+    this.serviceLayer.canvas.width = this.width;
+    this.serviceLayer.canvas.height = this.height;
     this.serviceLayer.context = this.serviceLayer.canvas.getContext('2d');
     this.add();
-    document.getElementById('addLayer').addEventListener('click', () => {
+    this.addLayerButton = document.getElementById('addLayer');
+    this.addLayerButton.addEventListener('click', () => {
         this.add();
     });
 };
@@ -30,7 +34,9 @@ Layers.prototype.add = function () {
     const context = canvas.getContext('2d');
     const layer = {canvas, context};
     const layerHandler = document.createElement('div');
-    layerHandler.innerText = 'layer ' + this.layerCounter;
+    const layerNameEl = document.createElement('span');
+    layerNameEl.innerText =  'layer ' + this.layerCounter;
+    layerHandler.appendChild(layerNameEl);
     layerHandler.classList.add('layers__layer');
     layerHandler.addEventListener('click', () => {
         this.currentLayer = layer;
@@ -40,15 +46,25 @@ Layers.prototype.add = function () {
         });
         layerHandler.classList.add('layers__layer_active');
     });
+    const layerDelButton = document.createElement('span');
+    layerDelButton.innerText = 'delete';
+    layerDelButton.addEventListener('click', (event) => {
+        layerHandler.remove();
+        canvas.remove();
+        this.currentLayer = null;
+        event.stopPropagation();
+    });
+    layerHandler.appendChild(layerDelButton);
     if (this.canvasContainer.lastChild === this.serviceLayer.canvas) {
         this.canvasContainer.insertBefore(canvas, this.serviceLayer.canvas);
     } else {
         this.canvasContainer.appendChild(canvas);
     }
-    if (this.layersContainer.firstChild === null) {
-        this.layersContainer.appendChild(layerHandler);
+    const layerElements = this.layersContainer.getElementsByClassName('layers__layer');
+    if (layerElements === null) {
+        this.layersContainer.insertBefore(layerHandler, this.addLayerButton);
     } else {
-        this.layersContainer.insertBefore(layerHandler, this.layersContainer.firstChild);
+        this.layersContainer.insertBefore(layerHandler, layerElements[0]);
     }
     this.layerCounter++;
 };

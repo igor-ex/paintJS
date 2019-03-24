@@ -5,13 +5,13 @@ const drawKind = {
     hexagon : 3
 };
 
-function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart,  options, callbackDispose){
+function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart,  options, app){
     this.canvas = canvas;
     this.currentLayerCtx = currentLayerCtx;
     this.serviceLayerCtx = serviceLayerCtx;
     this.figureKind = figureKind;
     this.mouseStart = mouseStart;
-    this.callbackDispose = callbackDispose;
+    this.app = app;
     this.options = options;
     this.drawingCtx = (figureKind == drawKind.circle) ? this.currentLayerCtx : this.serviceLayerCtx;
     this.mouseMove=this.drawMove.bind(this);
@@ -23,6 +23,9 @@ function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart
 
 Drawer.prototype.checkFigure = function(){
     switch (this.figureKind){
+        case drawKind.brush:
+            this.drawFigure= this.drawBrush;
+            break;
         case drawKind.rectangle:
             this.drawFigure= this.drawRect;
             break;
@@ -113,5 +116,5 @@ Drawer.prototype.close=function(e){
     this.drawFigure(e,this.canvas, this.currentLayerCtx);
     this.canvas.removeEventListener("mousemove",this.mouseMove);
     this.canvas.removeEventListener("mouseup", this.mouseUp);
-    this.callbackDispose();
+    this.app.clearDrawer.call(this.app);
 };

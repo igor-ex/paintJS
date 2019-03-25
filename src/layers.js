@@ -30,7 +30,8 @@ Layers.prototype.init = function (app) {
         const rect = this.serviceTopLayer.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        const options = {thickness: this.app.sizeEl.value, r: 200, g: 50, b: 50};
+        const color = hexToRgb(this.app.colorEl.value);
+        const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b};
         new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});
     });
     this.add();
@@ -98,4 +99,13 @@ function insertAfter(newElement,targetElement) {
     } else {
         parent.insertBefore(newElement, targetElement.nextSibling);
     }
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
 }

@@ -31,6 +31,7 @@ App.prototype.init = function () {
         this.state.tool = 0;
     });
     this.sizeEl = document.getElementById('size');
+    this.colorEl = document.getElementById('color');
     this.text.renderFields(this.state.language);
 };
 

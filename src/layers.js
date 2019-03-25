@@ -26,7 +26,7 @@ Layers.prototype.init = function (app) {
     this.serviceTopLayer.addEventListener('mousedown', (event) => {
         if (this.currentLayer === null) {
             setMessage('У Вас нет активного слоя для рисования');
-            //return;
+            return;
         }
         if (typeof this.app.state.tool === 'undefined') {
             setMessage('У Вас не выбран инструмент для рисования');
@@ -35,9 +35,9 @@ Layers.prototype.init = function (app) {
         const rect = this.serviceTopLayer.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        const blure = 0.99; //todo в переменную передать значение размытости с вьюхи с диапазоном 0.1 - 0.99
+        const blur = this.app.blurEl.value;
         const color = hexToRgb(this.app.colorEl.value);
-        const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b, blurRange: blure};
+        const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b, blurRange: blur};
         new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});
     });
     this.add();

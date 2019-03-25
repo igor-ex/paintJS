@@ -122,6 +122,7 @@ body {
   padding: 15px;
   background: #fff;
   overflow-y: auto;
+  user-select: none;
 }
 .message_visible {
   display: flex;

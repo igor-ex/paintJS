@@ -34,6 +34,7 @@ App.prototype.init = function () {
     });
     this.sizeEl = document.getElementById('size');
     this.colorEl = document.getElementById('color');
+    this.blurEl = document.getElementById('blur');
    
     this.text.renderFields(this.state.language);
 };

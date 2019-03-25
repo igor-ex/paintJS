@@ -25,9 +25,9 @@ Text.prototype.renderFields = function (language) {
 
     this.simpleFields.forEach(function (data) {
         if (typeof lang[data.label] !== 'undefined') {
-            data.element.innerText = lang[data.label];
+            set(data.element, lang[data.label]);
         } else if (typeof languages['en'][data.label] !== 'undefined') {
-            data.element.innerText = languages['en'][data.label];
+            set(data.element, languages['en'][data.label]);
         } else {
             throw new Error('text data not found for label ' + data.label);
         }
@@ -42,4 +42,11 @@ Text.prototype.renderFields = function (language) {
             throw new Error('text data not found for label ' + data.label);
         }
     });
+    function set(node, text) {
+        if (node.nodeName === '#text') {
+            node.nodeValue = text;
+        } else {
+            node.innerText = text;
+        }
+    }
 };

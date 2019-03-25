@@ -22,7 +22,11 @@ function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart
 }
 
 Drawer.prototype.checkFigure = function(){
+
     switch (this.figureKind){
+        case drawKind.brush:
+            this.drawFigure= this.drawBrush;
+            break;
         case drawKind.rectangle:
             this.drawFigure= this.drawRect;
             break;
@@ -32,9 +36,7 @@ Drawer.prototype.checkFigure = function(){
         case drawKind.hexagon:
             this.drawFigure= this.drawHexagon;
             break;
-        case drawKind.brush:
-            this.drawFigure= this.drawBrush;
-            break;
+
     }
 };
 
@@ -50,50 +52,40 @@ Drawer.prototype.drawMove = function(e) {
 
 };
 
+Drawer.prototype.drawBrush = function(e, canvas, ctx){
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const circleRadius = this.options.thickness;
+    const radiusGradient = circleRadius * this.options.blurRange;
+    const gradientOptions = ctx.createRadialGradient(x,y,radiusGradient,x,y,circleRadius);
+    gradientOptions.addColorStop(0, `rgba(${this.options.r},${this.options.g},${this.options.b},1)`);
+    gradientOptions.addColorStop(1, `rgba(${this.options.r},${this.options.g},${this.options.b},0)`);
+    ctx.fillStyle = gradientOptions;
+    ctx.fillRect(x-circleRadius,y-circleRadius,circleRadius*2,circleRadius*2);
+
+};
+
 Drawer.prototype.drawRect = function(e, canvas, ctx){
 
-    //let x = Math.min(e.pageX - canvas.offsetLeft, this.mouseStart.x);
-    //let y = Math.min(e.pageY - canvas.offsetTop, this.mouseStart.y);
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;
     const x = Math.min(tmpX, this.mouseStart.x);
     const y = Math.min(tmpY, this.mouseStart.y);
-    //let width = Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x);
-    //let height = Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y);
     const width = Math.abs(tmpX - this.mouseStart.x);
     const height = Math.abs(tmpY - this.mouseStart.y);
+    ctx.strokeStyle = `rgba(${this.options.r},${this.options.g},${this.options.b})`;
+    ctx.lineWidth = this.options.thickness;
     ctx.strokeRect(x, y, width, height);
 };
 
-Drawer.prototype.drawBrush = function(e, canvas, ctx){
-
-    let x = (e.pageX - canvas.offsetLeft);
-    let y = (e.pageY - canvas.offsetTop);
-
-    var radgrad = ctx.createRadialGradient(60,60,0,60,60,60);
-    radgrad.addColorStop(0, 'rgba(255,0,0,1)');
-    radgrad.addColorStop(0.8, 'rgba(228,0,0,.9)');
-    radgrad.addColorStop(1, 'rgba(228,0,0,0)');
-
-    ctx.beginPath();
-    let size = this.options.thickness;
-    let color = `rgb(${this.options.r},${this.options.g},${this.options.b})`;
-    ctx.arc(x, y, size, 0, Math.PI * 2, false);
-    ctx.fillStyle = radgrad;
-    ctx.fill();
-    ctx.closePath();
-
-};
-
 Drawer.prototype.drawCircle =  function(e, canvas, ctx){
-    //let x = (e.pageX - canvas.offsetLeft +this.mouseStart.x) / 2;
-    //let y = (e.pageY - canvas.offsetTop + this.mouseStart.y) / 2;
 
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;
-
     const x = (tmpX + this.mouseStart.x) / 2;
     const y = (tmpY + this.mouseStart.y) / 2;
 
@@ -104,19 +96,18 @@ Drawer.prototype.drawCircle =  function(e, canvas, ctx){
 
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+    ctx.strokeStyle = `rgba(${this.options.r},${this.options.g},${this.options.b})`;
+    ctx.lineWidth = this.options.thickness;
     ctx.stroke();
     ctx.closePath();
+
 };
 
 Drawer.prototype.drawHexagon = function(e, canvas, ctx){
-    // let size = Math.max(Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x), Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y));
-    // let centerX = e.pageX - canvas.offsetLeft;
-    // let centerY = e.pageY - canvas.offsetTop;
 
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;
-
     const size = Math.max(Math.abs(tmpX - this.mouseStart.x), Math.abs(tmpY - this.mouseStart.y));
     const centerX = tmpX;
     const centerY = tmpY;
@@ -128,9 +119,8 @@ Drawer.prototype.drawHexagon = function(e, canvas, ctx){
         ctx.lineTo (centerX + size * Math.cos(i * 2 * Math.PI / 6), centerY + size * Math.sin(i * 2 * Math.PI / 6));
     }
 
-    ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 1;
-
+    ctx.strokeStyle = `rgba(${this.options.r},${this.options.g},${this.options.b})`;
+    ctx.lineWidth = this.options.thickness;
     ctx.stroke();
 };
 

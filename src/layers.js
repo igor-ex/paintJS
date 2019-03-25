@@ -30,8 +30,9 @@ Layers.prototype.init = function (app) {
         const rect = this.serviceTopLayer.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
+        const blure = 0.99; //todo в переменную передать значение размытости с вьюхи с диапазоном 0.1 - 0.99
         const color = hexToRgb(this.app.colorEl.value);
-        const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b};
+        const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b, blurRange: blure};
         new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});
     });
     this.add();

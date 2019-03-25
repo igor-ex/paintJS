@@ -5,13 +5,13 @@ const drawKind = {
     hexagon : 3
 };
 
-function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart,  options, callbackDispose){
+function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart,  options, app){
     this.canvas = canvas;
     this.currentLayerCtx = currentLayerCtx;
     this.serviceLayerCtx = serviceLayerCtx;
     this.figureKind = figureKind;
     this.mouseStart = mouseStart;
-    this.callbackDispose = callbackDispose;
+    this.app = app;
     this.options = options;
     this.drawingCtx = (figureKind == drawKind.brush) ? this.currentLayerCtx : this.serviceLayerCtx;
     this.mouseMove=this.drawMove.bind(this);

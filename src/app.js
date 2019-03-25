@@ -3,6 +3,7 @@ function App () {
     this.text = null;
     this.layers = null;
     this.state = null;
+    this.drawFunction = null;
 }
 
 App.prototype.init = function () {
@@ -14,6 +15,7 @@ App.prototype.init = function () {
     this.text.setText('settings', settingsLabel);
     this.layers = new Layers;
     this.layers.init(this);
+    
     this.circle = document.getElementById('circle');
     this.rect = document.getElementById('rect');
     this.hexagon = document.getElementById('hexa');
@@ -32,7 +34,15 @@ App.prototype.init = function () {
     });
     this.sizeEl = document.getElementById('size');
     this.colorEl = document.getElementById('color');
+   
     this.text.renderFields(this.state.language);
+};
+
+App.prototype.clearDrawer=function(){
+    console.log("end drawing");
+    console.log(this);
+    this.layers.serviceLayer.canvas.removeEventListener('mousedown', this.drawFunction);
+    this.drawer=null;
 };
 
 App.prototype.setLanguage = function (lang) {

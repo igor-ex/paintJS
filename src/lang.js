@@ -1,6 +1,6 @@
 
 //список текстовых кусков на разных языках
-languages = {
+const languages = {
     en: {
         settings: 'Settings',
         layer: 'layer',

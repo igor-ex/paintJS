@@ -21,6 +21,7 @@ Layers.prototype.init = function (app) {
     this.height = this.canvasContainer.clientHeight;
     this.serviceLayer.canvas.width = this.width;
     this.serviceLayer.canvas.height = this.height;
+    this.serviceTopLayer.style.cssText = `width: ${this.width}px; height: ${this.height}px;`;
     this.serviceLayer.context = this.serviceLayer.canvas.getContext('2d');
     this.serviceTopLayer.addEventListener('mousedown', (event) => {
         if (this.currentLayer === null || typeof this.app.state.tool === 'undefined') {

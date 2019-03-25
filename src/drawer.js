@@ -32,6 +32,9 @@ Drawer.prototype.checkFigure = function(){
         case drawKind.hexagon:
             this.drawFigure= this.drawHexagon;
             break;
+        case drawKind.brush:
+            this.drawFigure= this.drawBrush;
+            break;
     }
 };
 
@@ -84,12 +87,19 @@ Drawer.prototype.drawBrush = function(e, canvas, ctx){
 };
 
 Drawer.prototype.drawCircle =  function(e, canvas, ctx){
-    let x = (e.pageX - canvas.offsetLeft +this.mouseStart.x) / 2;
-    let y = (e.pageY - canvas.offsetTop + this.mouseStart.y) / 2;
+    //let x = (e.pageX - canvas.offsetLeft +this.mouseStart.x) / 2;
+    //let y = (e.pageY - canvas.offsetTop + this.mouseStart.y) / 2;
+
+    const rect = canvas.getBoundingClientRect();
+    const tmpX = e.clientX - rect.left;
+    const tmpY = e.clientY - rect.top;
+
+    const x = (tmpX + this.mouseStart.x) / 2;
+    const y = (tmpY + this.mouseStart.y) / 2;
 
     let radius = Math.max(
-        Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x),
-        Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y)
+        Math.abs(tmpX - this.mouseStart.x),
+        Math.abs(tmpY - this.mouseStart.y)
     ) / 2;
 
     ctx.beginPath();
@@ -99,9 +109,17 @@ Drawer.prototype.drawCircle =  function(e, canvas, ctx){
 };
 
 Drawer.prototype.drawHexagon = function(e, canvas, ctx){
-    let size = Math.max(Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x), Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y));
-    let centerX = e.pageX - canvas.offsetLeft;
-    let centerY = e.pageY - canvas.offsetTop;
+    // let size = Math.max(Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x), Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y));
+    // let centerX = e.pageX - canvas.offsetLeft;
+    // let centerY = e.pageY - canvas.offsetTop;
+
+    const rect = canvas.getBoundingClientRect();
+    const tmpX = e.clientX - rect.left;
+    const tmpY = e.clientY - rect.top;
+
+    const size = Math.max(Math.abs(tmpX - this.mouseStart.x), Math.abs(tmpY - this.mouseStart.y));
+    const centerX = tmpX;
+    const centerY = tmpY;
 
     ctx.beginPath();
     ctx.moveTo (centerX +  size * Math.cos(0), centerY +  size *  Math.sin(0));

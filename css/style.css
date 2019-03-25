@@ -90,10 +90,6 @@ body {
 .content__service-top-layer {
   position: absolute;
 }
-.content__service-top-layer {
-  width: 100%;
-  height: 100%;
-}
 .layers {
   width: 200px;
 }

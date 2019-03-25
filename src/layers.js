@@ -30,7 +30,7 @@ Layers.prototype.init = function (app) {
         const rect = this.serviceTopLayer.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        const options = {thickness: 10, r: 200, g: 50, b: 50};
+        const options = {thickness: this.app.sizeEl.value, r: 200, g: 50, b: 50};
         new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});
     });
     this.add();

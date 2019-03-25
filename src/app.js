@@ -30,7 +30,7 @@ App.prototype.init = function () {
     this.brush.addEventListener('click', () => {
         this.state.tool = 0;
     });
-
+    this.sizeEl = document.getElementById('size');
     this.text.renderFields(this.state.language);
 };
 

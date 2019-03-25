@@ -24,7 +24,12 @@ Layers.prototype.init = function (app) {
     this.serviceTopLayer.style.cssText = `width: ${this.width}px; height: ${this.height}px;`;
     this.serviceLayer.context = this.serviceLayer.canvas.getContext('2d');
     this.serviceTopLayer.addEventListener('mousedown', (event) => {
-        if (this.currentLayer === null || typeof this.app.state.tool === 'undefined') {
+        if (this.currentLayer === null) {
+            setMessage('У Вас нет активного слоя для рисования');
+            //return;
+        }
+        if (typeof this.app.state.tool === 'undefined') {
+            setMessage('У Вас не выбран инструмент для рисования');
             return;
         }
         const rect = this.serviceTopLayer.getBoundingClientRect();

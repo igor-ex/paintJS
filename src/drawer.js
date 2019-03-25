@@ -118,7 +118,7 @@ Drawer.prototype.drawHexagon = function(e, canvas, ctx){
     for (let i = 1; i <= 6;i += 1) {
         ctx.lineTo (centerX + size * Math.cos(i * 2 * Math.PI / 6), centerY + size * Math.sin(i * 2 * Math.PI / 6));
     }
-
+    ctx.lineTo (centerX + size * Math.cos(2 * Math.PI / 6), centerY + size * Math.sin(2 * Math.PI / 6));
     ctx.strokeStyle = `rgba(${this.options.r},${this.options.g},${this.options.b})`;
     ctx.lineWidth = this.options.thickness;
     ctx.stroke();

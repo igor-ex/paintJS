@@ -13,7 +13,7 @@ function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart
     this.mouseStart = mouseStart;
     this.callbackDispose = callbackDispose;
     this.options = options;
-    this.drawingCtx = (figureKind == drawKind.circle) ? this.currentLayerCtx : this.serviceLayerCtx;
+    this.drawingCtx = (figureKind == drawKind.brush) ? this.currentLayerCtx : this.serviceLayerCtx;
     this.mouseMove=this.drawMove.bind(this);
     this.mouseUp=this.close.bind(this);
     this.canvas.addEventListener("mousemove",this.mouseMove);
@@ -36,7 +36,7 @@ Drawer.prototype.checkFigure = function(){
 };
 
 Drawer.prototype.clearScr = function(ctx){
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.clearRect(0, 0, this.canvas.clientWidth, this.canvas.clientHeight);
 };
 
 Drawer.prototype.drawMove = function(e) {
@@ -49,10 +49,17 @@ Drawer.prototype.drawMove = function(e) {
 
 Drawer.prototype.drawRect = function(e, canvas, ctx){
 
-    let x = Math.min(e.pageX - canvas.offsetLeft, this.mouseStart.x);
-    let y = Math.min(e.pageY - canvas.offsetTop, this.mouseStart.y);
-    let width = Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x);
-    let height = Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y);
+    //let x = Math.min(e.pageX - canvas.offsetLeft, this.mouseStart.x);
+    //let y = Math.min(e.pageY - canvas.offsetTop, this.mouseStart.y);
+    const rect = canvas.getBoundingClientRect();
+    const tmpX = e.clientX - rect.left;
+    const tmpY = e.clientY - rect.top;
+    const x = Math.min(tmpX, this.mouseStart.x);
+    const y = Math.min(tmpY, this.mouseStart.y);
+    //let width = Math.abs(e.pageX - canvas.offsetLeft - this.mouseStart.x);
+    //let height = Math.abs(e.pageY - canvas.offsetTop - this.mouseStart.y);
+    const width = Math.abs(tmpX - this.mouseStart.x);
+    const height = Math.abs(tmpY - this.mouseStart.y);
     ctx.strokeRect(x, y, width, height);
 };
 
@@ -113,5 +120,6 @@ Drawer.prototype.close=function(e){
     this.drawFigure(e,this.canvas, this.currentLayerCtx);
     this.canvas.removeEventListener("mousemove",this.mouseMove);
     this.canvas.removeEventListener("mouseup", this.mouseUp);
+    this.clearScr(this.serviceLayerCtx);
     this.callbackDispose();
 };

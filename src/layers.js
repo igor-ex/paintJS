@@ -2,6 +2,7 @@
 function Layers () {
     this.currentLayer = null;
     this.serviceLayer = null;
+    this.serviceTopLayer = null;
     this.canvasContainer = null;
     this.layersContainer = null;
     this.layerCounter = 1;
@@ -15,11 +16,22 @@ Layers.prototype.init = function (app) {
     this.serviceLayer.canvas = document.getElementById('serviceCanvas');
     this.canvasContainer = document.getElementById('content');
     this.layersContainer = document.getElementById('layers');
+    this.serviceTopLayer = document.getElementById('serviceTopLayer');
     this.width = this.canvasContainer.clientWidth;
     this.height = this.canvasContainer.clientHeight;
     this.serviceLayer.canvas.width = this.width;
     this.serviceLayer.canvas.height = this.height;
     this.serviceLayer.context = this.serviceLayer.canvas.getContext('2d');
+    this.serviceTopLayer.addEventListener('mousedown', (event) => {
+        if (this.currentLayer === null || typeof this.app.state.tool === 'undefined') {
+            return;
+        }
+        const rect = this.serviceTopLayer.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const options = {thickness: 10, r: 200, g: 50, b: 50};
+        new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});
+    });
     this.add();
     this.addLayerButton = document.getElementById('addLayer');
     this.addLayerButton.addEventListener('click', () => {
@@ -45,14 +57,15 @@ Layers.prototype.add = function () {
     });
     layerHandler.appendChild(layerNameEl);
     layerHandler.classList.add('layers__layer');
-    layerHandler.addEventListener('click', () => {
+    const activateLayer = () => {
         this.currentLayer = layer;
         insertAfter(this.serviceLayer.canvas, layer.canvas);
         Array.prototype.forEach.call(this.layersContainer.getElementsByClassName('layers__layer'), function (el) {
             el.classList.remove('layers__layer_active');
         });
         layerHandler.classList.add('layers__layer_active');
-    });
+    };
+    layerHandler.addEventListener('click', activateLayer);
     const layerDelButton = document.createElement('span');
     layerDelButton.innerText = 'delete';
     layerDelButton.addEventListener('click', (event) => {
@@ -62,10 +75,10 @@ Layers.prototype.add = function () {
         event.stopPropagation();
     });
     layerHandler.appendChild(layerDelButton);
-    if (this.canvasContainer.lastChild === this.serviceLayer.canvas) {
+    if (this.serviceTopLayer.previousSibling === this.serviceLayer.canvas) {
         this.canvasContainer.insertBefore(canvas, this.serviceLayer.canvas);
     } else {
-        this.canvasContainer.appendChild(canvas);
+        this.canvasContainer.insertBefore(canvas, this.serviceTopLayer);
     }
     const layerElements = this.layersContainer.getElementsByClassName('layers__layer');
     if (layerElements === null) {
@@ -73,6 +86,7 @@ Layers.prototype.add = function () {
     } else {
         this.layersContainer.insertBefore(layerHandler, layerElements[0]);
     }
+    activateLayer();
     this.layerCounter++;
 };
 

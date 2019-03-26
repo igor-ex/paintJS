@@ -78,8 +78,10 @@ Layers.prototype.add = function () {
     layerDelButton.innerText = 'delete';
     layerDelButton.addEventListener('click', (event) => {
         layerHandler.remove();
+        if (this.currentLayer.canvas === canvas) {
+            this.currentLayer = null;
+        }
         canvas.remove();
-        this.currentLayer = null;
         event.stopPropagation();
     });
     layerHandler.appendChild(layerDelButton);

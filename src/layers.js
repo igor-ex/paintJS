@@ -74,15 +74,12 @@ Layers.prototype.add = function () {
         layerHandler.classList.add('layers__layer_active');
     };
     layerHandler.addEventListener('click', activateLayer);
-    const layerDelButton = document.createElement('img');
-    layerDelButton.src = 'src/delete-button.svg';
-    layerDelButton.classList.add('layers__del-button');
+    const layerDelButton = document.createElement('span');
+    layerDelButton.innerText = 'delete';
     layerDelButton.addEventListener('click', (event) => {
         layerHandler.remove();
-        if (this.currentLayer.canvas === canvas) {
-            this.currentLayer = null;
-        }
         canvas.remove();
+        this.currentLayer = null;
         event.stopPropagation();
     });
     layerHandler.appendChild(layerDelButton);

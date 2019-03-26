@@ -1,57 +1,71 @@
-/* general and reset */
+
 @font-face {
   font-family: 'Roboto Slab';
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(https://fonts.gstatic.com/s/robotoslab/v8/BngMUXZYTXPIvIBgJJSb6ufJ5qA.ttf) format('truetype');
 }
+
 * {
-  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   font-family: 'Roboto Slab', serif;
   font-size: 20px;
   margin: 0;
   padding: 0;
 }
-input,
-button {
-  font-family: 'Roboto Slab', serif;
-  font-size: 20px;
-  outline: none;
-}
-/* page main elements */
+
 .app {
   padding: 15px;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .horizontal-menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
   height: 70px;
   border: 1px solid gray;
 }
+
+.horizontal-menu__element {
+	margin: 5px;
+}
+
 .settings {
+	  list-style: none;
   position: relative;
-  width: 150px;
-  padding: 0;
-  margin: 0;
 }
 .settings > li > ul {
   top: 40px;
   left: 0;
 }
 .settings li {
+	  list-style: none;
   padding: 5px 10px;
   position: relative;
   background: white;
   width: 150px;
   border: 1px solid gray;
 }
+
+.settings li:hover ul {
+	padding: 15px 0;
+	background: #333;
+	opacity: 1;
+	visibility: visible;
+	box-shadow: 1px 1px 7px rgba(0,0,0,.5);
+}
+
 .settings ul {
   position: absolute;
   top: 0;
@@ -59,48 +73,29 @@ button {
   padding: 0;
   z-index: 10;
 }
+
 .settings li ul {
   display: none;
 }
-.settings li ul.settings__inner_visible {
+.settings li ul.visible {
   display: block;
 }
+
 .settings > li li:hover > ul {
   display: block;
 }
-.settings__setting {
-  display: block;
-  list-style: none;
-  position: absolute;
-}
-.settings__setting ul,
-.settings__setting li {
-  list-style: none;
-}
+
 .wrapper {
   border: 1px solid gray;
   height: 50px;
   flex: 1;
   display: flex;
 }
+
 .vertical-menu {
   width: 200px;
 }
-.vertical-menu__button {
-  display: block;
-  margin: 15px auto;
-  padding: 10px;
-  width: 100px;
-  background: none;
-  border: none;
-  outline: none;
-}
-.vertical-menu__button:first-child {
-  margin-top: 30px;
-}
-.vertical-menu__button_active {
-  background: rgba(0, 0, 0, 0.1);
-}
+
 .content {
   flex: 1;
   border: 1px solid gray;
@@ -111,31 +106,20 @@ button {
 .content__service-top-layer {
   position: absolute;
 }
+
 .layers {
   width: 200px;
 }
 .layers__layer {
   cursor: pointer;
-  padding: 3px 7px;
   user-select: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .layers__layer_active {
-  background: orangered;
+  background: red;
   color: white;
 }
 .layers__add-layer-button {
   padding: 7px 15px;
-  width: 100%;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.layers__del-button {
-  width: 15px;
 }
 .message {
   position: fixed;

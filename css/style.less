@@ -1,7 +1,7 @@
 @font-size: 20px;
 @settings-width: 150px;
 
-/* general and reset */
+/* general */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&subset=cyrillic');
 
@@ -19,12 +19,6 @@ body {
   font-size: @font-size;
   margin: 0;
   padding: 0;
-}
-
-input, button {
-  font-family: 'Roboto Slab', serif;
-  font-size: @font-size;
-  outline: none;
 }
 
 /* page main elements */
@@ -45,53 +39,54 @@ input, button {
   width: @settings-width;
   padding: 0;
   margin: 0;
+}
 
-  &>li>ul {
-    top: 40px;
-    left: 0;
-  }
+.settings>li>ul {
+  top: 40px;
+  left: 0;
+}
 
-  & li {
-     padding: 5px 10px;
-     position: relative;
-     background: white;
-     width: @settings-width;
-     border: 1px solid gray;
-   }
+.settings li {
+  padding: 5px 10px;
+  position: relative;
+  background: white;
+  width: @settings-width;
+  border: 1px solid gray;
+}
 
-  & ul {
-      position: absolute;
-      top: 0;
-      left: @settings-width - 2px;
-      padding: 0;
-      z-index: 10;
-    }
+.settings ul {
+  position: absolute;
+  top: 0;
+  left: @settings-width - 2px;
+  padding: 0;
+  z-index: 10;
+}
 
-  & li ul {
-    display: none;
-  }
+#setting {
+  display: block;
+  list-style: none;
+  position: absolute;
+}
 
-  &>li:hover>ul {
-    //display: block;
-  }
 
-  & li ul.settings__inner_visible {
-    display: block;
-  }
+#setting ul, #setting li {
+  list-style: none;
+}
 
-  &>li li:hover>ul {
-    display: block;
-  }
+.settings li ul {
+  display: none;
+}
 
-  &__setting {
-    display: block;
-    list-style: none;
-    position: absolute;
+.settings>li:hover>ul {
+  //display: block;
+}
 
-    & ul, & li {
-      list-style: none;
-    }
-  }
+.settings li ul.visible {
+  display: block;
+}
+
+.settings>li li:hover>ul {
+  display: block;
 }
 
 .wrapper {
@@ -103,24 +98,6 @@ input, button {
 
 .vertical-menu {
   width: 200px;
-
-  &__button {
-    display: block;
-    margin: 15px auto;
-    padding: 10px;
-    width: 100px;
-    background: none;
-    border: none;
-    outline: none;
-
-    &:first-child {
-      margin-top: 30px;
-    }
-  }
-
-  &__button_active {
-    background: rgba(0, 0, 0, .1);
-  }
 }
 
 .content {
@@ -136,34 +113,20 @@ input, button {
 
 .layers {
   width: 200px;
+}
 
-  &__layer {
-    cursor: pointer;
-    padding: 3px 7px;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.layers__layer {
+  cursor: pointer;
+  user-select: none;
+}
 
-  &__layer_active {
-    background: orangered;
-    color: white;
-  }
+.layers__layer_active {
+  background: red;
+  color: white;
+}
 
-  &__add-layer-button {
-    padding: 7px 15px;
-    width: 100%;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
-  &__del-button {
-    width: 15px;
-
-  }
+.layers__add-layer-button {
+  padding: 7px 15px;
 }
 
 .message {

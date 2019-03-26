@@ -1,7 +1,7 @@
 @font-size: 20px;
 @settings-width: 150px;
 
-/* general */
+/* general and reset */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&subset=cyrillic');
 
@@ -19,6 +19,12 @@ body {
   font-size: @font-size;
   margin: 0;
   padding: 0;
+}
+
+input, button {
+  font-family: 'Roboto Slab', serif;
+  font-size: @font-size;
+  outline: none;
 }
 
 /* page main elements */
@@ -97,6 +103,24 @@ body {
 
 .vertical-menu {
   width: 200px;
+
+  &__button {
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+    width: 100px;
+    background: none;
+    border: none;
+    outline: none;
+
+    &:first-child {
+      margin-top: 30px;
+    }
+  }
+
+  &__button_active {
+    background: rgba(0, 0, 0, .1);
+  }
 }
 
 .content {
@@ -115,16 +139,30 @@ body {
 
   &__layer {
     cursor: pointer;
+    padding: 3px 7px;
     user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__layer_active {
-    background: red;
+    background: orangered;
     color: white;
   }
 
   &__add-layer-button {
     padding: 7px 15px;
+    width: 100%;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__del-button {
+    width: 15px;
+
   }
 }
 

@@ -14,6 +14,19 @@ window.addEventListener('load', function () {
     messageWrapper.addEventListener('click', function () {
         messageWrapper.classList.remove('message_visible');
     });
+    
+    //tool buttons styling
+    const menu = document.getElementById('verticalMenu');
+    menu.addEventListener('click', function (event) {
+        if (!event.target.parentNode.classList.contains('vertical-menu__button')) {
+            return;
+        }
+        const buttons = menu.getElementsByClassName('vertical-menu__button');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('vertical-menu__button_active');
+        }
+        event.target.parentNode.classList.add('vertical-menu__button_active');
+    });
 });
 
 function setMessage(message) {

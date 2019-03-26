@@ -2,11 +2,11 @@ window.addEventListener('load', function () {
     const setting = document.getElementById('setting');
     const settingInner = document.getElementById('settingInner');
     setting.addEventListener('click', function (ev) {
-        settingInner.classList.toggle('visible');
+        settingInner.classList.toggle('settings__inner_visible');
         ev.stopPropagation();
     });
     window.addEventListener('click', function () {
-        settingInner.classList.remove('visible');
+        settingInner.classList.remove('settings__inner_visible');
     });
 
     //message modal window

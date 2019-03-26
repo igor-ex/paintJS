@@ -53,23 +53,23 @@ body {
   padding: 0;
   z-index: 10;
 }
-#setting {
-  display: block;
-  list-style: none;
-  position: absolute;
-}
-#setting ul,
-#setting li {
-  list-style: none;
-}
 .settings li ul {
   display: none;
 }
-.settings li ul.visible {
+.settings li ul.settings__inner_visible {
   display: block;
 }
 .settings > li li:hover > ul {
   display: block;
+}
+.settings__setting {
+  display: block;
+  list-style: none;
+  position: absolute;
+}
+.settings__setting ul,
+.settings__setting li {
+  list-style: none;
 }
 .wrapper {
   border: 1px solid gray;

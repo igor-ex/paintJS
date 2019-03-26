@@ -39,54 +39,53 @@ body {
   width: @settings-width;
   padding: 0;
   margin: 0;
-}
 
-.settings>li>ul {
-  top: 40px;
-  left: 0;
-}
+  &>li>ul {
+    top: 40px;
+    left: 0;
+  }
 
-.settings li {
-  padding: 5px 10px;
-  position: relative;
-  background: white;
-  width: @settings-width;
-  border: 1px solid gray;
-}
+  & li {
+     padding: 5px 10px;
+     position: relative;
+     background: white;
+     width: @settings-width;
+     border: 1px solid gray;
+   }
 
-.settings ul {
-  position: absolute;
-  top: 0;
-  left: @settings-width - 2px;
-  padding: 0;
-  z-index: 10;
-}
+  & ul {
+      position: absolute;
+      top: 0;
+      left: @settings-width - 2px;
+      padding: 0;
+      z-index: 10;
+    }
 
-#setting {
-  display: block;
-  list-style: none;
-  position: absolute;
-}
+  & li ul {
+    display: none;
+  }
 
+  &>li:hover>ul {
+    //display: block;
+  }
 
-#setting ul, #setting li {
-  list-style: none;
-}
+  & li ul.settings__inner_visible {
+    display: block;
+  }
 
-.settings li ul {
-  display: none;
-}
+  &>li li:hover>ul {
+    display: block;
+  }
 
-.settings>li:hover>ul {
-  //display: block;
-}
+  &__setting {
+    display: block;
+    list-style: none;
+    position: absolute;
 
-.settings li ul.visible {
-  display: block;
-}
-
-.settings>li li:hover>ul {
-  display: block;
+    & ul, & li {
+      list-style: none;
+    }
+  }
 }
 
 .wrapper {
@@ -113,20 +112,20 @@ body {
 
 .layers {
   width: 200px;
-}
 
-.layers__layer {
-  cursor: pointer;
-  user-select: none;
-}
+  &__layer {
+    cursor: pointer;
+    user-select: none;
+  }
 
-.layers__layer_active {
-  background: red;
-  color: white;
-}
+  &__layer_active {
+    background: red;
+    color: white;
+  }
 
-.layers__add-layer-button {
-  padding: 7px 15px;
+  &__add-layer-button {
+    padding: 7px 15px;
+  }
 }
 
 .message {

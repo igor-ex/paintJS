@@ -32,10 +32,12 @@ Layers.prototype.init = function (app) {
             setMessage('У Вас не выбран инструмент для рисования');
             return;
         }
+
         const rect = this.serviceTopLayer.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         const blur = this.app.blurEl.value;
+        this.app.text.setText("blur",this.app.blurEl);
         const color = hexToRgb(this.app.colorEl.value);
         const options = {thickness: this.app.sizeEl.value, r: color.r, g: color.g, b: color.b, blurRange: blur};
         new Drawer(this.serviceTopLayer, this.currentLayer.context, this.serviceLayer.context, app.state.tool, {x, y}, options, () => {});

@@ -10,7 +10,6 @@ App.prototype.init = function () {
     this.state = new State();
     this.text = new Text();
 
-    const settingsEl = document.getElementById('settings');
     const settingsLabel = document.getElementById('setting');
     this.text.setText('settings', settingsLabel.firstChild);
     this.layers = new Layers;

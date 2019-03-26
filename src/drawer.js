@@ -13,7 +13,7 @@ function Drawer(canvas, currentLayerCtx, serviceLayerCtx, figureKind, mouseStart
     this.mouseStart = mouseStart;
     this.app = app;
     this.options = options;
-    this.drawingCtx = (figureKind == drawKind.brush) ? this.currentLayerCtx : this.serviceLayerCtx;
+    this.drawingCtx = (figureKind === drawKind.brush) ? this.currentLayerCtx : this.serviceLayerCtx;
     this.mouseMove=this.drawMove.bind(this);
     this.mouseUp=this.close.bind(this);
     this.canvas.addEventListener("mousemove",this.mouseMove);
@@ -49,11 +49,9 @@ Drawer.prototype.drawMove = function(e) {
         this.clearScr(this.serviceLayerCtx);
     }
     this.drawFigure(e,this.canvas, this.drawingCtx);
-
 };
 
 Drawer.prototype.drawBrush = function(e, canvas, ctx){
-
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -64,11 +62,9 @@ Drawer.prototype.drawBrush = function(e, canvas, ctx){
     gradientOptions.addColorStop(1, `rgba(${this.options.r},${this.options.g},${this.options.b},0)`);
     ctx.fillStyle = gradientOptions;
     ctx.fillRect(x-circleRadius,y-circleRadius,circleRadius*2,circleRadius*2);
-
 };
 
 Drawer.prototype.drawRect = function(e, canvas, ctx){
-
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;
@@ -82,7 +78,6 @@ Drawer.prototype.drawRect = function(e, canvas, ctx){
 };
 
 Drawer.prototype.drawCircle =  function(e, canvas, ctx){
-
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;
@@ -100,11 +95,9 @@ Drawer.prototype.drawCircle =  function(e, canvas, ctx){
     ctx.lineWidth = this.options.thickness;
     ctx.stroke();
     ctx.closePath();
-
 };
 
 Drawer.prototype.drawHexagon = function(e, canvas, ctx){
-
     const rect = canvas.getBoundingClientRect();
     const tmpX = e.clientX - rect.left;
     const tmpY = e.clientY - rect.top;

@@ -1,0 +1,26 @@
+.horizontal-menu {
+  border: 1px solid gray;
+}
+.settings {
+  padding: 0;
+  margin: 0;
+}
+.settings > li > ul {
+}
+
+.settings li {
+  background: white;
+  border: 1px solid gray;
+
+}
+.layers__layer_active {
+  background: red;
+  color: white;
+}
+.message {
+  background: rgba(0, 0, 0, 0.5);
+}
+.message__content {
+  background: #fff;
+}
+/*# sourceMappingURL=style.css.map */
